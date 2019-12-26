@@ -62,13 +62,13 @@ class ViewController: UIViewController {
         Web.sendRequest(.userList, query: "\(nextOffset)") { (result) in
             switch result {
             case .success(let response):
+                self.refreshController.endRefreshing()
                 if let data = response.data as? JSON {
                     self.hasMore = data["data"]["has_more"].boolValue
                     let userData = data["data"]["users"].arrayValue
 
                     if self.nextOffset == 0 {
                         self.arrayUserList.removeAll()
-                        self.refreshController.endRefreshing()
                     }
 
                     for object in userData {
@@ -80,6 +80,7 @@ class ViewController: UIViewController {
                 
             case .failure(let error):
                 var message = ""
+                self.refreshController.endRefreshing()
                 switch error {
                 case .noInternet:
                     message = "Internet connection is not available. Cross check you internet connectivity and try again"

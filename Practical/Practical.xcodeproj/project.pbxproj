@@ -47,10 +47,10 @@
 		12A7641023B4C6A100443544 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		12A7641223B4C6D300443544 /* UserCollectionviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionviewCell.swift; sourceTree = "<group>"; };
 		12A7641323B4C6D300443544 /* UserCollectionviewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserCollectionviewCell.xib; sourceTree = "<group>"; };
-		12A7641623B4C6EB00443544 /* HeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionViewCell.swift; sourceTree = "<group>"; };
-		12A7641723B4C6EB00443544 /* HeaderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderCollectionViewCell.xib; sourceTree = "<group>"; };
-		12A7641A23B4C70200443544 /* FooterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterCollectionViewCell.swift; sourceTree = "<group>"; };
-		12A7641B23B4C70200443544 /* FooterCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FooterCollectionViewCell.xib; sourceTree = "<group>"; };
+		12A7641623B4C6EB00443544 /* HeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HeaderCollectionViewCell.swift; path = ../HeaderCollectionViewCell.swift; sourceTree = "<group>"; };
+		12A7641723B4C6EB00443544 /* HeaderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HeaderCollectionViewCell.xib; path = ../HeaderCollectionViewCell.xib; sourceTree = "<group>"; };
+		12A7641A23B4C70200443544 /* FooterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FooterCollectionViewCell.swift; path = ../FooterCollectionViewCell.swift; sourceTree = "<group>"; };
+		12A7641B23B4C70200443544 /* FooterCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = FooterCollectionViewCell.xib; path = ../FooterCollectionViewCell.xib; sourceTree = "<group>"; };
 		41704C06377AD69020A98AA7 /* Pods-Practical.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Practical.debug.xcconfig"; path = "Target Support Files/Pods-Practical/Pods-Practical.debug.xcconfig"; sourceTree = "<group>"; };
 		CFD5ADCD6C28C27FC73AF841 /* Pods_Practical.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Practical.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F45B4E163A773ED071E3BAE7 /* Pods-Practical.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Practical.release.xcconfig"; path = "Target Support Files/Pods-Practical/Pods-Practical.release.xcconfig"; sourceTree = "<group>"; };
@@ -90,11 +90,11 @@
 			isa = PBXGroup;
 			children = (
 				12A763EB23B4C46300443544 /* AppDelegate.swift */,
+				12A763FE23B4C4FD00443544 /* UserModel */,
+				12A763FD23B4C4F300443544 /* ViewController */,
 				12A7640123B4C53400443544 /* CollectionViewCell */,
 				12A7640023B4C52300443544 /* Network */,
 				12A763FF23B4C50D00443544 /* Common */,
-				12A763FE23B4C4FD00443544 /* UserModel */,
-				12A763FD23B4C4F300443544 /* ViewController */,
 				12A763EF23B4C46300443544 /* Main.storyboard */,
 				12A763F223B4C46500443544 /* Assets.xcassets */,
 				12A763F423B4C46500443544 /* LaunchScreen.storyboard */,
@@ -143,14 +143,38 @@
 		12A7640123B4C53400443544 /* CollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				12A7641E23B4D8E500443544 /* UserCollectionviewCell */,
+				12A7641F23B4D8F600443544 /* HeaderCollectionViewCell */,
+				12A7642023B4D90000443544 /* FooterCollectionViewCell */,
+			);
+			path = CollectionViewCell;
+			sourceTree = "<group>";
+		};
+		12A7641E23B4D8E500443544 /* UserCollectionviewCell */ = {
+			isa = PBXGroup;
+			children = (
 				12A7641223B4C6D300443544 /* UserCollectionviewCell.swift */,
 				12A7641323B4C6D300443544 /* UserCollectionviewCell.xib */,
+			);
+			path = UserCollectionviewCell;
+			sourceTree = "<group>";
+		};
+		12A7641F23B4D8F600443544 /* HeaderCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
 				12A7641623B4C6EB00443544 /* HeaderCollectionViewCell.swift */,
 				12A7641723B4C6EB00443544 /* HeaderCollectionViewCell.xib */,
+			);
+			path = HeaderCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		12A7642023B4D90000443544 /* FooterCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
 				12A7641A23B4C70200443544 /* FooterCollectionViewCell.swift */,
 				12A7641B23B4C70200443544 /* FooterCollectionViewCell.xib */,
 			);
-			path = CollectionViewCell;
+			path = FooterCollectionViewCell;
 			sourceTree = "<group>";
 		};
 		840E1CBE949BF7B442CCBED2 /* Pods */ = {
