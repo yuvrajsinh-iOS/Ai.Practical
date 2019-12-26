@@ -82,7 +82,7 @@ class ViewController: UIViewController {
                 var message = ""
                 switch error {
                 case .noInternet:
-                    message = "No internet connection"
+                    message = "Internet connection is not available. Cross check you internet connectivity and try again"
                 default :
                     message = error.localizedDescription
                 }
