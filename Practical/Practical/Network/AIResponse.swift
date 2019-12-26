@@ -1,11 +1,3 @@
-//
-//  AIResponse.swift
-//  OneRead
-//
-//  Created by MAC215 on 7/30/19.
-//  Copyright © 2019 MAC215. All rights reserved.
-//
-
 import Foundation
 import SwiftyJSON
 

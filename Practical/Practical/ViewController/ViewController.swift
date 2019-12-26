@@ -13,13 +13,15 @@ class ViewController: UIViewController {
 
     // MARK: - IBOutlet -
     @IBOutlet private var collectionUserList: UICollectionView!
+    @IBOutlet private var noInternetView: UIView!
+    @IBOutlet private var labelErrorMessage: UILabel!
 
     // MARK: - Variables -
-    private var nextOffset                  = 0
-    private var hasMore                     = false
-    private var arrayUserList:[UserModel]   = []
+    private var nextOffset                       = 0
+    private var hasMore                          = false
+    private var arrayUserList:[UserModel]        = []
 
-    //Mark:- Refresh controller
+    //MARK:- Refresh controller
     lazy var refreshController:UIRefreshControl! = {
         let refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull To Refresh")
@@ -31,6 +33,7 @@ class ViewController: UIViewController {
     // MARK: - Lifecycle Method -
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "User List"
         self.prepareView()
     }
 
@@ -49,8 +52,13 @@ class ViewController: UIViewController {
         self.callUserListAPI()
     }
 
+    @IBAction func retryClick(_ sender: UIButton) {
+        self.pullToRefresh()
+    }
+
     // MARK: - Webservice Method -
     private func callUserListAPI(){
+        self.noInternetView.isHidden = true
         Web.sendRequest(.userList, query: "\(nextOffset)") { (result) in
             switch result {
             case .success(let response):
@@ -79,41 +87,49 @@ class ViewController: UIViewController {
                     message = error.localizedDescription
                 }
                 Util.showAlet(message: message, view: self)
+                self.labelErrorMessage.text = message
+                self.noInternetView.isHidden = self.arrayUserList.count == 0 ? false : true
             }
         }
     }
 }
 
-extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
-    
+
+//MARK:- Collectionview Datasoure -
+extension ViewController:UICollectionViewDataSource {
+
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return self.arrayUserList.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.arrayUserList[section].userItem.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseIdentifier.userCollectionviewCell.identifier, for: indexPath) as! UserCollectionviewCell
         cell.items = self.arrayUserList[indexPath.section].userItem[indexPath.item]
         return cell
     }
-    
+}
+
+//MARK:- Collectionview Delegate -
+extension ViewController:UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
+
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if (indexPath.section == self.arrayUserList.count - 1) && hasMore && (indexPath.item == self.arrayUserList[indexPath.section].userItem.count - 1) {
             self.nextOffset += 10
             self.callUserListAPI()
         }
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ReuseIdentifier.headerCollectionViewCell.identifier, for: indexPath) as! HeaderCollectionViewCell
             headerView.user = self.arrayUserList[indexPath.section]
             return headerView
-            
+
         case UICollectionView.elementKindSectionFooter:
             let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ReuseIdentifier.footerCollectionViewCell.identifier, for: indexPath) as! FooterCollectionViewCell
             return footerView
@@ -121,36 +137,31 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource,UIC
             return UICollectionReusableView()
         }
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
         let arrayCount = self.arrayUserList[indexPath.section].userItem.count
-        let width = collectionView.frame.width
-        
+        let colletionWidth = collectionView.frame.width
+        let cellWidth = (colletionWidth - 30)/2
         if arrayCount % 2 == 0 {
-            let cellWidth = (width - 30)/2
             return CGSize(width: cellWidth, height: cellWidth)
         } else {
             if indexPath.item == 0{
-                return CGSize(width: width - 20, height: width - 20)
+                return CGSize(width: colletionWidth - 20, height: colletionWidth - 20)
             } else {
-                let cellWidth = (width - 30)/2
                 return CGSize(width: cellWidth, height: cellWidth)
             }
         }
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         let width = collectionView.frame.width
-        if (section == self.arrayUserList.count - 1) && hasMore {
-            return CGSize(width: width, height: 70.0)
-        }
-        return CGSize(width: width, height: 0.7)
+        return ((section == self.arrayUserList.count - 1) && hasMore) ? CGSize(width: width, height: 70.0) : CGSize(width: width, height: 0.7)
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         let width = collectionView.frame.width
         return CGSize(width: width, height: 70.0)
     }
-    
 }
 

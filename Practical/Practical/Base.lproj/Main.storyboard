@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wYX-Vz-JjO">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wYX-Vz-JjO">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="m5g-ap-EYu">
@@ -28,20 +28,62 @@
                                     <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="bth-lO-4Jy"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="HOY-f6-DWD"/>
+                                </connections>
                             </collectionView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ogA-QI-Qew">
+                                <rect key="frame" x="0.0" y="27" width="414" height="896"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Internet connection is not available. Cross check you internet connectivity and try again" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n7o-ap-1SC">
+                                        <rect key="frame" x="15" y="376" width="384" height="72"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" red="0.72941" green="0.0" blue="0.066669999999999993" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8eT-DL-Wlb">
+                                        <rect key="frame" x="132" y="468" width="150" height="50"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137254901957" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="0oc-np-f24"/>
+                                            <constraint firstAttribute="height" constant="50" id="XDD-72-eZr"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Retry"/>
+                                        <connections>
+                                            <action selector="retryClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9xl-Cv-woc"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="n7o-ap-1SC" secondAttribute="trailing" constant="15" id="XMf-Nh-f9v"/>
+                                    <constraint firstItem="8eT-DL-Wlb" firstAttribute="centerX" secondItem="ogA-QI-Qew" secondAttribute="centerX" id="bxR-bp-2wI"/>
+                                    <constraint firstItem="8eT-DL-Wlb" firstAttribute="top" secondItem="n7o-ap-1SC" secondAttribute="bottom" constant="20" id="hJT-OT-iGJ"/>
+                                    <constraint firstItem="n7o-ap-1SC" firstAttribute="leading" secondItem="ogA-QI-Qew" secondAttribute="leading" constant="15" id="kGf-e1-HNL"/>
+                                    <constraint firstItem="n7o-ap-1SC" firstAttribute="bottom" secondItem="ogA-QI-Qew" secondAttribute="centerY" id="yqm-8b-jgm"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="ogA-QI-Qew" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="1uy-zh-PUB"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="wYX-Vz-JjO" secondAttribute="bottom" id="6gh-fn-WYY"/>
+                            <constraint firstItem="ogA-QI-Qew" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="EgI-2z-PmV"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wYX-Vz-JjO" secondAttribute="trailing" id="H0r-eV-R7q"/>
                             <constraint firstItem="wYX-Vz-JjO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="jGW-ch-v5l"/>
+                            <constraint firstItem="ogA-QI-Qew" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="mcL-T6-Wsk"/>
                             <constraint firstItem="wYX-Vz-JjO" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="sA2-Sy-8yo"/>
+                            <constraint firstItem="ogA-QI-Qew" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="swY-4e-Y95"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="cn8-Bi-Chr"/>
                     <connections>
                         <outlet property="collectionUserList" destination="wYX-Vz-JjO" id="0bT-Pm-5xe"/>
+                        <outlet property="labelErrorMessage" destination="n7o-ap-1SC" id="6sq-EP-TYv"/>
+                        <outlet property="noInternetView" destination="ogA-QI-Qew" id="cSz-Ae-kR3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
